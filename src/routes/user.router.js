@@ -60,8 +60,7 @@ router.post("/login", async (req, res) => {
       maxAge: 24 * 3600 * 1000,
       httpOnly: true,
       sameSite: 'none',
-      secure: true,
-      domain: "starcafe-menu.netlify.app"
+      secure: true
     })
 
     res.status(200).send({mesagge: "Login"});
