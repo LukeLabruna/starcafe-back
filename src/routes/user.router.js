@@ -61,7 +61,7 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      domain: "https://starcafe-menu.netlify.app/"
+      domain: "starcafe-menu.netlify.app"
     })
 
     res.status(200).send({mesagge: "Login"});
