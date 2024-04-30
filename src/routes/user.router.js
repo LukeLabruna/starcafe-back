@@ -58,9 +58,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie("starcafeCookieToken", token, {
       maxAge: 24 * 3600 * 1000,
-      httpOnly: true,
-      sameSite: 'none',
-      domain: "starcafe-menu.netlify.app"
+      httpOnly: true
     })
 
     res.status(200).send({mesagge: "Login"});
