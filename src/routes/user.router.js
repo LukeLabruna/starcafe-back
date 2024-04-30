@@ -58,7 +58,8 @@ router.post("/login", async (req, res) => {
 
     res.cookie("starcafeCookieToken", token, {
       maxAge: 24 * 3600 * 1000,
-      httpOnly: true
+      httpOnly: true,
+      secure: true
     })
 
     res.status(200).send({mesagge: "Login"});
