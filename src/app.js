@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(cors({ origin: 'http://localhost:5173',
+app.use(cors({ origin: 'https://starcafe-menu.netlify.app',
 credentials: true}))
 
 initializePassport(); 
