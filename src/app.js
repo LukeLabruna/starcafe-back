@@ -9,7 +9,6 @@ const userRouter = require("./routes/user.router.js")
 const cors = require('cors')
 
 const app = express()
-const PORT = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -23,4 +22,4 @@ initializePassport();
 app.use("/api/products", productsRouter)
 app.use("/api/user", userRouter)
 
-const httpServer = app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
+module.exports = app
