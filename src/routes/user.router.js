@@ -1,10 +1,10 @@
-const express = require("express")
-const passport = require("passport")
-const UserModel = require("../model/user.model.js")
-const router = express.Router()
-const jwt = require("jsonwebtoken")
-const { createHash, isValidPassword } = require("../utils/hashPassword.js")
+import express from "express";
+import passport from "passport";
+import jwt from "jsonwebtoken";
+import UserModel from "../model/user.model.js";
+import { createHash, isValidPassword } from "../utils/hashPassword.js";
 
+const router = express.Router();
 
 router.post("/register", async (req, res) => {
   const { user, password } = req.body;
@@ -79,4 +79,4 @@ router.post("/logout", (req, res) => {
 })
 
 
-module.exports = router
+export default router

@@ -1,9 +1,11 @@
-const passport = require("passport")
-const jwt = require("passport-jwt")
-require("dotenv").config()
+import passport from "passport";
+import passportJwt from "passport-jwt";
+import dotenv from "dotenv";
 
-const JWTStrategy = jwt.Strategy;
-const ExtractJwt = jwt.ExtractJwt;
+dotenv.config();
+
+const JWTStrategy = passportJwt.Strategy;
+const ExtractJwt = passportJwt.ExtractJwt;
 
 const initializePassport = () => {
 	passport.use("jwt", new JWTStrategy({
@@ -28,4 +30,4 @@ const cookieExtractor = (req) => {
 }
 
 
-module.exports = initializePassport
+export default initializePassport

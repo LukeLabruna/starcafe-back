@@ -1,14 +1,16 @@
-const express = require("express")
-require("dotenv").config()
-require("./database.js")
-const cookieParser = require("cookie-parser")
-const passport = require("passport")
-const initializePassport = require("./config/passport.config.js")
-const productsRouter = require("./routes/products.router.js")
-const userRouter = require("./routes/user.router.js")
-const cors = require('cors')
+import express from "express";
+import dotenv from "dotenv";
+import "./database.js";
+import cookieParser from "cookie-parser";
+import passport from "passport";
+import initializePassport from "./config/passport.config.js";
+import productsRouter from "./routes/products.router.js";
+import userRouter from "./routes/user.router.js";
+import cors from "cors";
 
-const app = express()
+dotenv.config();
+
+const app = express();
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -22,4 +24,4 @@ initializePassport();
 app.use("/api/products", productsRouter)
 app.use("/api/user", userRouter)
 
-module.exports = app
+export default app
