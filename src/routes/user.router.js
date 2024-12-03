@@ -3,6 +3,7 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 import UserModel from "../model/user.model.js";
 import { createHash, isValidPassword } from "../utils/hashPassword.js";
+import {SECRET_KEY_TOKEN} from "../config/env.config.js"
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.post("/register", async (req, res) => {
 
     await newUser.save();
 
-    const token = jwt.sign({ user, role: newUser.role }, process.env.SECRET_KEY_TOKEN, { expiresIn: "24h" });
+    const token = jwt.sign({ user, role: newUser.role }, SECRET_KEY_TOKEN, { expiresIn: "24h" });
 
     res.cookie("starcafeCookieToken", token, {
       maxAge: 24 * 3600 * 1000, 
@@ -54,7 +55,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).send("Contraseña incorrecta");
     }
 
-    const token = jwt.sign({ user: userExist.user, role: userExist.role }, process.env.SECRET_KEY_TOKEN, { expiresIn: "24h" });
+    const token = jwt.sign({ user: userExist.user, role: userExist.role }, SECRET_KEY_TOKEN, { expiresIn: "24h" });
 
     res.cookie("starcafeCookieToken", token, {
       maxAge: 24 * 3600 * 1000,
