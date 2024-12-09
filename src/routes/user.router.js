@@ -4,40 +4,12 @@ import jwt from "jsonwebtoken";
 import UserModel from "../model/user.model.js";
 import { createHash, isValidPassword } from "../utils/hashPassword.js";
 import {SECRET_KEY_TOKEN} from "../config/env.config.js"
+import UserController from "../controller/userController.js"
+const userController = new UserController
 
 const router = express.Router();
 
-router.post("/register", async (req, res) => {
-  const { user, password } = req.body;
-
-  try {
-
-    const userExist = await UserModel.findOne({ user })
-
-    if (userExist) {
-      return res.status(400).send("El usuario ya existe")
-    }
-
-    const newUser = new UserModel({
-      user,
-      password: createHash(password)
-    })
-
-    await newUser.save();
-
-    const token = jwt.sign({ user, role: newUser.role }, SECRET_KEY_TOKEN, { expiresIn: "24h" });
-
-    res.cookie("starcafeCookieToken", token, {
-      maxAge: 24 * 3600 * 1000, 
-      httpOnly: true
-    })
-
-    res.redirect("/");
-
-  } catch (error) {
-    res.status(500).send(`${error}`);
-  }
-})
+router.post("/register", userController.register)
 
 
 router.post("/login", async (req, res) => {

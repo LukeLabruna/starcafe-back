@@ -3,8 +3,7 @@ import { createHash, isValidPassword } from "../utils/hashPassword.js";
 
 class UserRepository {
 
-    async createUser(user) {
-        const { userName, password } = user
+    async createUser(userName, password) {
         try {
             const userExist = await UserModel.findOne({ userName })
             if (userExist) throw new Error("User already exist.")
@@ -29,6 +28,6 @@ class UserRepository {
             throw error
           }
     }
-
-    
 }
+
+export default UserRepository
