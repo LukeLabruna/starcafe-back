@@ -17,12 +17,11 @@ class ProductRepository {
         }
     }
 
-    async addProduct(product) {
-        const { productName, price, category } = product
+    async addProduct(productName, price, category) {
         try {
             const productExist = await ProductModel.findOne({ productName })
             if (productExist) {
-                throw new Error("Product already exist")
+                throw new Error("Product already exist.")
             }
             const newProduct = await ProductModel.create({ productName, price, category })
             return newProduct
@@ -34,7 +33,7 @@ class ProductRepository {
     async updatePrice(pid, newPrice) {
         try {
             const product = await ProductModel.findByIdAndUpdate(pid, { price: newPrice }, { new: true })
-            if (!product) throw new Error("Product not found")
+            if (!product) throw new Error("Product not found.")
             return product
         } catch (error) {
             throw error

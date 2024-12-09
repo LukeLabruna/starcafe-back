@@ -16,7 +16,7 @@ class UserController {
             })
             res.status(200).json({status: "success", message: "User created and logged in", data: {newUser, token}})
         } catch (error) {
-            if (error.message === "User already exist.") return res.status(409).json({status: "error", message: "User already exist."})
+            if (error.message === "User already exist.") return res.status(409).json({status: "error", message: error.message})
             res.status(500).json({status: "error", data: error})    
         }
     }
@@ -33,9 +33,9 @@ class UserController {
             res.status(200).json({status: "success", message: "User logged in", data: {user, token}})
         } catch (error) {
             if (error.message === "No valid username.") {
-                return res.status(404).json({status: "error", message: "No valid username."})
+                return res.status(404).json({status: "error", message: error.message})
             } else if (error.message === "No valid password.") {
-                return res.status(401).json({status: "error", message: "No valid password."})
+                return res.status(401).json({status: "error", message: error.message})
             } else res.status(500).json({status: "error", data: error})
         }
     }
