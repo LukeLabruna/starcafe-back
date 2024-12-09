@@ -21,6 +21,25 @@ class UserController {
         }
     }
 
+    async login(req, res) {
+        const { userName, password } = req.body
+        try {
+            const user = await userRepository.userValidPassword(userName, password)
+            const token = jwt.sign({ userName, role: user.role }, SECRET_KEY_TOKEN, { expiresIn: "24h" });
+            res.cookie("starcafeCookieToken", token, {
+                maxAge: 24 * 3600 * 1000,
+                httpOnly: true
+            })
+            res.status(200).json({status: "success", message: "User logged in", data: {user, token}})
+        } catch (error) {
+            if (error.message === "No valid username.") {
+                return res.status(404).json({status: "error", message: "No valid username."})
+            } else if (error.message === "No valid password.") {
+                return res.status(401).json({status: "error", message: "No valid password."})
+            } else res.status(500).json({status: "error", data: error})
+        }
+    }
+
 }
 
 export default UserController
