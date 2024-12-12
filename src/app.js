@@ -19,6 +19,7 @@ app.use(cors({credentials: true}))
 initializePassport(); 
 
 app.use(authMiddleware)
+app.get("/", (req, res) => res.status(200).json({status: "success", message: "API Star-Cafe working"}))
 app.use("/api/products", productsRouter)
 app.use("/api/user", userRouter)
 
