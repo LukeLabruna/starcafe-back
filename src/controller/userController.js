@@ -39,7 +39,12 @@ class UserController {
             } else res.status(500).json({status: "error", data: error})
         }
     }
-
+    async isAuth(req, res) {
+        if (!req.user) {
+            return res.status(401).json({ status: "error", isAuth: false, user: null });
+        }
+        res.status(200).json({ status:"success", isAuth: true, user: req.user });
+    }
 }
 
 export default UserController
