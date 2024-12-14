@@ -14,7 +14,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(passport.initialize())
-app.use(cors({credentials: true}))
+const corsOptions = {
+    credentials: true,
+    origin: "http://localhost:5173"
+}
+app.use(cors(corsOptions))
 
 initializePassport(); 
 
