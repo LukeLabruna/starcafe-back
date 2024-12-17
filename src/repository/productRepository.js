@@ -5,11 +5,11 @@ class ProductRepository {
     async getProducts(category) {
         try {
             if (!category) {
-                const products = await ProductModel.find()
+                const products = await ProductModel.find().sort({ category: 1 })
                 if (products.length === 0) throw new Error("Products not found.")
                 return products
             }
-            const productsCategory = await ProductModel.find({ category })
+            const productsCategory = await ProductModel.find({ category }).sort({ category: 1 })
             if (productsCategory.length === 0) throw new Error("Products not found.")
             return productsCategory
         } catch (error) {
