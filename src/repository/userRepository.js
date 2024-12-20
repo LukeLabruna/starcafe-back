@@ -22,7 +22,8 @@ class UserRepository {
         try {
             const userExist = await UserModel.findOne({ userName })
             if (!userExist) throw new Error("No valid username.")
-            if (!isValidPassword(password, userExist)) throw new Error("No valid password.")
+            const isValid = await isValidPassword(password, userExist)
+            if (!isValid) throw new Error("No valid password.")
             return userExist
           } catch (error) {
             throw error
