@@ -12,7 +12,9 @@ class UserController {
             const token = jwt.sign({ userName, role: newUser.role }, SECRET_KEY_TOKEN, { expiresIn: "24h" });
             res.cookie("starcafeCookieToken", token, {
                 maxAge: 24 * 3600 * 1000,
-                httpOnly: true
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None', 
             })
             res.status(200).json({status: "success", message: "User created and logged in", data: {newUser, token}})
         } catch (error) {
@@ -28,7 +30,9 @@ class UserController {
             const token = jwt.sign({ userName, role: user.role }, SECRET_KEY_TOKEN, { expiresIn: "24h" });
             res.cookie("starcafeCookieToken", token, {
                 maxAge: 24 * 3600 * 1000,
-                httpOnly: true
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None', 
             })
             res.status(200).json({status: "success", message: "User logged in", data: {user, token}})
         } catch (error) {
