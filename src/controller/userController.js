@@ -49,6 +49,15 @@ class UserController {
         }
         res.status(200).json({ status:"success", isAuth: true, user: req.user });
     }
+
+    async logout(req, res) {
+        res.clearCookie('starcafeCookieToken', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+        })
+        res.status(200).json({ status: "success", message: "Logout successfully" })
+    }
 }
 
 export default UserController
