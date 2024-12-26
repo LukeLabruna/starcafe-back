@@ -16,7 +16,7 @@ app.use(cookieParser())
 app.use(passport.initialize())
 const corsOptions = {
     credentials: true,
-    origin: "https://starcafe-front.vercel.app"
+    origin: "https://starcafe-ar.vercel.app"
 }
 app.use(cors(corsOptions))
 
